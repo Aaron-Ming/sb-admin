@@ -15,6 +15,10 @@ app = Flask(__name__)
 def tab():
 	return render_template('tab.html')
 
+@app.route('/user')
+def user():
+	return render_template('user.html')
+
 @app.route('/layout')
 def layout():
 	return render_template('layout.html')

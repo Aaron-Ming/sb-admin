@@ -1,0 +1,195 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<div class="row">
+    
+    <div class="col-lg-12">
+    <!-- <h2></h2> -->
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel text-left">
+                <div class="panel-body">
+                    <button type="button" class="btn btn-xs btn-primary text-left">新建用户</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel text-center">
+                <div class="panel-body">
+                    <p style="font-size:25px;color:black;font-weight:bold">用户管理</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pane text-right">
+                <div class="panel-body">
+                    <!-- <button type="button" class="btn btn-xs btn-primary text-left">新建用户</button> -->
+                    <button type="button" class="btn btn-xs btn-primary text-right">导出</button>
+                    <button type="button" class="btn btn-xs btn-primary text-right">导入</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" style="white-space: nowrap;" id="data-table">
+                <thead>
+                    <tr>
+                        <th>USE</th>
+                        <th>用户名</th>
+                        <th>密码</th>
+                        <th>角色</th>
+                        <th>邮箱</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>joke</td>
+                        <td>12345678</td>
+                        <td>admin</td>
+                        <td>admin@cdb.com.cn</td>
+                        <td>xxxxxxxxxxxxxxxxxx</td>
+                    </tr>
+                    
+
+                </tbody>
+            </table>
+        </div>
+    </div>  
+</div>
+<script>
+
+// $(document).ready(function() {
+//     $('#data-table').DataTable({
+//         'dom': '<"float_left"f>r<"float_right"l>tip',
+//         'language': {
+//             'emptyTable': '没有数据',
+//             'loadingRecords': '加载中...',
+//             'processing': '查询中...',
+//             'search': '检索:',
+//             'lengthMenu': '每页 _MENU_ 条',
+//             'zeroRecords': '没有数据',
+//             'paginate': {
+//                 'first': '第一页',
+//                 'last': '最后一页',
+//                 'next': '下一页',
+//                 'previous': '上一页'
+//             },
+//             'info': '第 _PAGE_ 页 / 总 _PAGES_ 页',
+//             'infoEmpty': '没有数据',
+//             'infoFiltered': '(过滤总件数 _MAX_ 条)'
+//         },
+//         'scrollCollapse': true,
+//         'scrollY': true,
+//         'scrollX': true,
+//         'scrollXInner': "150%"
+//     });
+// });
+
+
+$(document).ready(function() {
+    $('#data-table').DataTable({
+        'scrollCollapse': true,
+        'scrollY': true,
+        'scrollX': true,
+        'scrollXInner': "150%"
+})
+})
+</script>
+{% endblock %}
+
