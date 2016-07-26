@@ -2,17 +2,106 @@
 
 {% block body %}
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <form role="form" style="float:right;">
+            <div class="form-group">
+                <input type="file">
+            </div>
+            <button type="submit" class="btn btn-primary btn-xs">上传</button>
+            <button type="reset" class="btn btn-warning btn-xs">重置</button>
+            <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">取消</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div id="add-user-Modal" class="modal fade">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">新增用户</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline animated bounceInLeft" id="user-form" action='/user/add' method='POST'>
+
+          <div class="form-group" style="margin-top:5px">
+            <label for="username" class="add_user_form_wid">用户名</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Joke">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="password" class="add_user_form_wid">密码</label>
+            <input type="text" name="password" class="form-control" id="password" placeholder="admin123!@#">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="role" class="add_user_form_wid">角色</label>
+            <input type="text" name="role" class="form-control" id="role" placeholder="administrator">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="email" class="add_user_form_wid">邮箱</label>
+            <input type="text" name="email" class="form-control" id="email" placeholder="joke@cdb.com.cn">
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary btn-xs add-user-btn">保存并添加</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="update-user-Modal" class="modal fade">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">修改用户信息</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline animated bounceInLeft" id="update-user-form" action='/user/update' method='POST'>
+
+          <div class="form-group" style="margin-top:5px">
+            <label for="update_password" class="add_user_form_wid">密码</label>
+            <input type="text" name="update_password" class="form-control" id="update_password" placeholder="密码">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="update_role" class="add_user_form_wid">角色</label>
+            <input type="text" name="update_role" class="form-control" id="update_role" placeholder="角色">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="update_email" class="add_user_form_wid">邮箱</label>
+            <input type="text" name="update_email" class="form-control" id="update_email" placeholder="邮箱">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary btn-xs update-btn">保存并修改</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <div class="row">
-    
     <div class="col-lg-12">
-    <!-- <h2></h2> -->
-
     <div class="row">
         <div class="col-lg-4">
             <div class="panel text-left">
                 <div class="panel-body">
-                    <button type="button" class="btn btn-xs btn-primary text-left">添加用户</button>
+                    <button type="button" class="btn btn-xs btn-primary text-left" data-toggle="modal" data-target="#add-user-Modal">添加用户</button>
                 </div>
             </div>
         </div>
@@ -28,7 +117,7 @@
                 <div class="panel-body">
                     <!-- <button type="button" class="btn btn-xs btn-primary text-left">新建用户</button> -->
                     <button type="button" class="btn btn-xs btn-primary text-right">导出</button>
-                    <button type="button" class="btn btn-xs btn-primary text-right">导入</button>
+                    <button type="button" class="btn btn-xs btn-primary text-right" data-toggle="modal" data-target="#myModal">导入</button>
                 </div>
             </div>
         </div>
@@ -49,7 +138,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for data in user_info %}
                     <tr>
+                        <td>{{loop.index}}</td>
+                        <td>{{data['username']}}</td>
+                        <td>{{data['password']}}</td>
+                        <td>{{data['role']}}</td>
+                        <td>{{data['email']}}</td>
+                        <td><button data-userid="{{data['id']}}" class="btn btn-danger btn-xs delete-user-btn">删除</button><button type="submit" data-userid="{{data['id']}}" data-username="{{data['username']}}" data-password="{{data['password']}}" data-role="{{data['role']}}" data-role="{{data['email']}}" style="margin-left:10px;" class="btn btn-warning btn-xs update-user-btn" data-toggle="modal" data-target="#update-user-Modal">更新</button></td>
+                    </tr>
+                    {% endfor %}
+<!--                     <tr>
                         <td>1</td>
                         <td>joke</td>
                         <td>12345678</td>
@@ -144,7 +243,7 @@
                         <td>admin</td>
                         <td>admin@cdb.com.cn</td>
                         <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
+                    </tr> -->
                     
 
                 </tbody>
@@ -152,8 +251,106 @@
         </div>
     </div>  
 </div>
-<script>
 
+
+
+
+
+
+
+<script>
+    // 新增用户
+    $('#add-user-Modal').find('.add-user-btn').on('click', function() {
+        var username = $('#username').val()
+        var password = $('#password').val()
+        var role = $('#role').val()
+        var email = $('#email').val()
+        var user_info_post = {
+            username: username,
+            password: password,
+            role: role,
+            email:email
+        }
+
+    $.post('/user/add', user_info_post, function(res) {
+        if (res == 'ok') {
+            $('#user-form')[0].reset()
+            $('#add-user-Modal').modal('hide')
+            swal({
+                title: "666",
+                text: "恭喜恭喜，添加用户成功",
+                imageUrl: "/static/sweetalert/example/images/thumbs-up.jpg"
+            })
+            // 实现页面自动跳转
+            location.href = "/user"
+
+
+        } else {
+            swal("用户添加失败", "用户名不能为空哦~", "error")
+
+        }
+    })
+    return false
+})
+
+
+
+    // 更新用户
+    $(document).on('click', '.update-user-btn', function() {
+        var user_id = $(this).attr('data-userid')
+        var update_password = $(this).attr('data-password')
+        var update_role = $(this).attr('data-role')
+        var update_email = $(this).attr('data-email')
+        $('#update_password').val(update_password)
+        $('#update_role').val(update_role)
+        $('#update_email').val(update_email)
+
+        // $('#update-vmassets-Modal').attr('data-update_ip_addr', update_ip_addr)
+
+        $('#update-user-Modal').attr('data-userid', user_id).modal('show')
+        })
+    $('#update-user-Modal').find('.update-btn').on('click', function() {
+        var id = $('#update-user-Modal').attr('data-userid')
+        // console.log(id)
+        var user_info_post = {
+            update_password: $('#update_password').val(),
+            update_role: $('#update_role').val(),
+            update_email: $('#update_email').val(),
+            id: id
+        }
+
+        // console.log(user_info_post)
+        $.post('/user/update', user_info_post, function(res) {
+          if (res == 'ok') {
+            swal('用户信息修改成功')
+            $('#update-user-form')[0].reset()
+            $('#update-user-Modal').modal('hide')
+            // 实现页面自动跳转
+            location.href = "/user"
+          }else if (res == 'error') {
+            swal('信息修改失败')
+            $('#update-user-form')[0].reset()
+            $('#update-user-Modal').modal('hide')
+
+          }
+        })
+        return false
+    })
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
 // $(document).ready(function() {
 //     $('#data-table').DataTable({
 //         'dom': '<"float_left"f>r<"float_right"l>tip',
@@ -180,8 +377,6 @@
 //         'scrollXInner': "150%"
 //     });
 // });
-
-
 $(document).ready(function() {
     $('#data-table').DataTable({
         'scrollCollapse': true,
@@ -192,4 +387,3 @@ $(document).ready(function() {
 })
 </script>
 {% endblock %}
-

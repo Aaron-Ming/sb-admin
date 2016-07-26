@@ -1,0 +1,629 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <form role="form" style="float:right;">
+            <div class="form-group" >
+                <input type="file">
+            </div>
+            <button type="submit" class="btn btn-primary btn-xs">上传</button>
+            <button type="reset" class="btn btn-warning btn-xs">重置</button>
+            <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">取消</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="add-vmassets-Modal" class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">新增资源</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline animated bounceInLeft" id="vmassets-form" action='/vm-assets/add' method='POST'>
+          <div class="form-group" style="margin-top:5px">
+            <label for="ip_addr" class="add_res_form_wid">IP地址</label>
+            <input type="text" name="user" class="form-control" id="ip_addr" placeholder="ip_addr">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="app_name" class="add_res_form_wid">应用系统</label>
+            <input type="text" name="pwd" class="form-control" id="app_name" placeholder="app_name">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="hostname" class="add_res_form_wid">主机名</label>
+            <input type="text" name="pwd" class="form-control" id="hostname" placeholder="hostname">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="cpu" class="add_res_form_wid">CPU</label>
+            <input type="text" name="pwd" class="form-control" id="cpu" placeholder="cpu">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="memory" class="add_res_form_wid">内存</label>
+            <input type="text" name="pwd" class="form-control" id="memory" placeholder="memory">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="disk" class="add_res_form_wid">硬盘</label>
+            <input type="text" name="pwd" class="form-control" id="disk" placeholder="disk">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="os" class="add_res_form_wid">操作系统</label>
+            <input type="text" name="pwd" class="form-control" id="os" placeholder="os">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="status" class="add_res_form_wid">使用状态</label>
+            <input type="text" name="pwd" class="form-control" id="status" placeholder="status">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="office_name" class="add_res_form_wid">负责处室</label>
+            <input type="text" name="pwd" class="form-control" id="office_name" placeholder="office_name">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="office_contact" class="add_res_form_wid">行方负责人</label>
+            <input type="text" name="pwd" class="form-control" id="office_contact" placeholder="office_contact">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="office_phone" class="add_res_form_wid">行方电话</label>
+            <input type="text" name="pwd" class="form-control" id="office_phone" placeholder="office_phone">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="object_contact" class="add_res_form_wid">项目负责人</label>
+            <input type="text" name="pwd" class="form-control" id="object_contact" placeholder="object_contact">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="object_phone" class="add_res_form_wid">项目组电话</label>
+            <input type="text" name="pwd" class="form-control" id="object_phone" placeholder="object_phone">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="create_date" class="add_res_form_wid">创建日期</label>
+            <input type="text" name="pwd" class="form-control" id="create_date" placeholder="create_date">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="end_date" class="add_res_form_wid">回收日期</label>
+            <input type="text" name="pwd" class="form-control" id="end_date" placeholder="end_date">
+          </div>
+          <div class="form-group" style="margin-top:5px">
+            <label for="notes" class="add_res_form_wid">备注</label>
+            <input type="text" name="pwd" class="form-control" id="notes" placeholder="notes">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary btn-xs add-vmassets-btn">保存并添加</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="panel text-left">
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-xs btn-primary text-left" data-toggle="modal" data-target="#add-vmassets-Modal">新增资源</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel text-center">
+                    <div class="panel-body">
+                        <!-- <p style="font-size:25px;color:black;font-weight:bold">用户管理</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="pane text-right">
+                    <div class="panel-body">
+                        <!-- <button type="button" class="btn btn-xs btn-primary text-left">新建用户</button> -->
+                        <button type="button" class="btn btn-xs btn-primary text-right">导出</button>
+                        <button type="button" class="btn btn-xs btn-primary text-right" data-toggle="modal" data-target="#myModal">导入</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" style="white-space: nowrap;" id="data-table">
+                <thead>
+                    <tr>
+                        <th>USE</th>
+                        <th>IP地址</th>
+                        <th>应用系统名称</th>
+                        <th>主机名</th>
+                        <th>vCenter名称</th>
+                        <th>CPU</th>
+                        <th>内存</th>
+                        <th>硬盘</th>
+                        <th>操作系统</th>
+                        <th>使用状态</th>
+                        <th>负责处室</th>
+                        <th>行方负责人</th>
+                        <th>行方电话</th>
+                        <th>项目组联系人</th>
+                        <th>项目组联系方式</th>
+                        <th>创建日期</th>
+                        <th>拟定回收日期</th>
+                        <th>备注</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>/index.html</td>
+                        <td>1265</td>
+                        <td>32.3%</td>
+                        <td>$321.33</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Vi33333333333333333sits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/about.html</td>
+                        <td>261</td>
+                        <td>33.3%</td>
+                        <td>$234.12</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% 444444444444444444New Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/sales.html</td>
+                        <td>665</td>
+                        <td>21.3%</td>
+                        <td>$16.34</td>
+                        <td>Page</td>
+                        <td>V4444444444444444isits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blo44444444444444444444g.html</td>
+                        <td>9516</td>
+                        <td>89.3%</td>
+                        <td>$1644.43</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% N44444444ew Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/404.html</td>
+                        <td>23</td>
+                        <td>34.3%</td>
+                        <td>$23.52</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Pag444444444444444e</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/services.html</td>
+                        <td>421</td>
+                        <td>60.3%</td>
+                        <td>$724.32</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% N444444444444ew Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                    <tr>
+                        <td>/blog/post.html</td>
+                        <td>1233</td>
+                        <td>93.2%</td>
+                        <td>$126.34</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                        <td>Page</td>
+                        <td>Visits</td>
+                        <td>% Ne4444444444444444w Visits</td>
+                        <td>Revenue</td>
+                        <td>Visits</td>
+                        <td>% New Visits</td>
+                        <td>Revenue</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>  
+</div>
+<script>
+
+// $(document).ready(function() {
+//     $('#data-table').DataTable({
+//         'dom': '<"float_left"f>r<"float_right"l>tip',
+//         'language': {
+//             'emptyTable': '没有数据',
+//             'loadingRecords': '加载中...',
+//             'processing': '查询中...',
+//             'search': '检索:',
+//             'lengthMenu': '每页 _MENU_ 条',
+//             'zeroRecords': '没有数据',
+//             'paginate': {
+//                 'first': '第一页',
+//                 'last': '最后一页',
+//                 'next': '下一页',
+//                 'previous': '上一页'
+//             },
+//             'info': '第 _PAGE_ 页 / 总 _PAGES_ 页',
+//             'infoEmpty': '没有数据',
+//             'infoFiltered': '(过滤总件数 _MAX_ 条)'
+//         },
+//         'scrollCollapse': true,
+//         'scrollY': true,
+//         'scrollX': true,
+//         'scrollXInner': "150%"
+//     });
+// });
+
+$(document).ready(function() {
+    $('#data-table').DataTable({
+        // 固定Datatables功能键
+        'scrollCollapse': true,
+        'scrollY': true,
+        'scrollX': true,
+        'scrollXInner': "150%"
+})
+})
+</script>
+{% endblock %}
+

@@ -29,5 +29,5 @@ CREATE TABLE vm_assets (
   object_phone varchar(25) DEFAULT NULL,
   create_date varchar(25) DEFAULT NULL,
   end_date varchar(25) DEFAULT NULL,
-  notes varchar(25) DEFAULT NULL,
+  notes varchar(255) DEFAULT NULL,
   PRIMARY KEY (id,ip_addr));
