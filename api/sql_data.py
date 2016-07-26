@@ -48,6 +48,12 @@ class User:
             return False
         return True
 
+    def user_import(self):
+        pass
+
+    def user_export(self):
+        pass
+
 
 
 class VM_assets:

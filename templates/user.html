@@ -2,17 +2,12 @@
 
 {% block body %}
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="upload-file-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <form role="form" style="float:right;">
-<<<<<<< HEAD
-            <div class="form-group">
-=======
             <div class="form-group" >
-
->>>>>>> origin/master
                 <input type="file">
             </div>
             <button type="submit" class="btn btn-primary btn-xs">上传</button>
@@ -25,21 +20,15 @@
 </div>
 
 
-
-
 <div id="add-user-Modal" class="modal fade">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">新增用户</h4>
+        <h4 class="modal-title">新建用户</h4>
       </div>
       <div class="modal-body">
-<<<<<<< HEAD
-        <form class="form-inline animated bounceInLeft" id="user-form" action='/user/add' method='POST'>
-=======
         <form class="form-inline animated bounceInLeft" id="user-form" action='/vm-user/add' method='POST'>
->>>>>>> origin/master
 
           <div class="form-group" style="margin-top:5px">
             <label for="username" class="add_user_form_wid">用户名</label>
@@ -54,15 +43,9 @@
             <input type="text" name="role" class="form-control" id="role" placeholder="administrator">
           </div>
           <div class="form-group" style="margin-top:5px">
-<<<<<<< HEAD
             <label for="email" class="add_user_form_wid">邮箱</label>
             <input type="text" name="email" class="form-control" id="email" placeholder="joke@cdb.com.cn">
-=======
-            <label for="role" class="add_user_form_wid">邮箱</label>
-            <input type="text" name="role" class="form-control" id="role" placeholder="joke@cdb.com.cn">
->>>>>>> origin/master
           </div>
-
         </form>
       </div>
       <div class="modal-footer">
@@ -73,8 +56,6 @@
   </div>
 </div>
 
-
-<<<<<<< HEAD
 
 <div id="update-user-Modal" class="modal fade">
   <div class="modal-dialog modal-sm">
@@ -109,40 +90,26 @@
 </div>
 
 
-=======
->>>>>>> origin/master
 
 <div class="row">
     <div class="col-lg-12">
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="panel text-left">
-                <div class="panel-body">
-                    <button type="button" class="btn btn-xs btn-primary text-left" data-toggle="modal" data-target="#add-user-Modal">添加用户</button>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="panel text-left">
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-xs btn-primary text-left" data-toggle="modal" data-target="#add-user-Modal">新建用户</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="pane text-right">
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-xs btn-primary text-right">导出</button>
+                        <button type="button" class="btn btn-xs btn-primary text-right" data-toggle="modal" data-target="#upload-file-Modal">导入</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="panel text-center">
-                <div class="panel-body">
-                    <!-- <p style="font-size:25px;color:black;font-weight:bold">用户管理</p> -->
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="pane text-right">
-                <div class="panel-body">
-                    <!-- <button type="button" class="btn btn-xs btn-primary text-left">新建用户</button> -->
-                    <button type="button" class="btn btn-xs btn-primary text-right">导出</button>
-                    <button type="button" class="btn btn-xs btn-primary text-right" data-toggle="modal" data-target="#myModal">导入</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
         
 
@@ -159,114 +126,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for data in user_info %}
+                     {% for data in user_info %}
                     <tr>
                         <td>{{loop.index}}</td>
                         <td>{{data['username']}}</td>
                         <td>{{data['password']}}</td>
                         <td>{{data['role']}}</td>
                         <td>{{data['email']}}</td>
-                        <td><button data-userid="{{data['id']}}" class="btn btn-danger btn-xs delete-user-btn">删除</button><button type="submit" data-userid="{{data['id']}}" data-username="{{data['username']}}" data-password="{{data['password']}}" data-role="{{data['role']}}" data-role="{{data['email']}}" style="margin-left:10px;" class="btn btn-warning btn-xs update-user-btn" data-toggle="modal" data-target="#update-user-Modal">更新</button></td>
+                        <td><button data-userid="{{data['id']}}" class="btn btn-danger btn-xs delete-user-btn">删除</button><button type="submit" data-userid="{{data['id']}}" data-username="{{data['username']}}" data-password="{{data['password']}}" data-role="{{data['role']}}" data-email="{{data['email']}}" style="margin-left:10px;" class="btn btn-warning btn-xs update-user-btn" data-toggle="modal" data-target="#update-user-Modal">更新</button></td>
                     </tr>
-                    {% endfor %}
-<!--                     <tr>
-                        <td>1</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>joke</td>
-                        <td>12345678</td>
-                        <td>admin</td>
-                        <td>admin@cdb.com.cn</td>
-                        <td>xxxxxxxxxxxxxxxxxx</td>
-                    </tr> -->
-                    
-
+                    {% endfor %}                  
                 </tbody>
             </table>
         </div>
@@ -275,13 +144,6 @@
 
 
 
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> origin/master
 <script>
     // 新增用户
     $('#add-user-Modal').find('.add-user-btn').on('click', function() {
@@ -314,6 +176,35 @@
 
         }
     })
+    return false
+    })
+
+    // 删除用户
+    $(document).on('click', '.delete-user-btn', function() {
+    var id = $(this).attr('data-userid')
+    // alert(id)
+    swal({
+            title: "确定删除吗？",
+            text: "删除后你将永远会失去Ta",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定",
+            closeOnConfirm: false
+        },
+        function() {
+            // $.get('/del_res?id=' + id, function(res) {
+            $.post('/user/delete', {id: id}, function(res) {
+                if (res == 'ok') {
+                    swal('删除成功')
+                    // 实现页面自动跳转
+                    location.href = "/user"
+                } else if (res == 'error') {
+                    swal('删除失败')
+
+                }
+            })
+        })
     return false
 })
 
@@ -360,9 +251,6 @@
         })
         return false
     })
-
-
-
 </script>
 
 

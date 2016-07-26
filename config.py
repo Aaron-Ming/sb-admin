@@ -8,3 +8,8 @@ db_config = {
     'db':'tree'
 }
 
+app_config = {
+	'host':'0.0.0.0',
+	'port':8080,
+	'debug':True
+}
