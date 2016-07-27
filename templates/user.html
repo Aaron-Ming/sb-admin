@@ -6,11 +6,11 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <form role="form" style="float:right;">
+        <form action="/user/import" role="form" method="POST" enctype=multipart/form-data>
             <div class="form-group" >
-                <input type="file">
+                <input type="file" name="upload-excel">
             </div>
-            <button type="submit" class="btn btn-primary btn-xs">上传</button>
+            <button type="submit" class="btn btn-primary btn-xs" value="upload">上传</button>
             <button type="reset" class="btn btn-warning btn-xs">重置</button>
             <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">取消</button>
         </form>

@@ -2,11 +2,12 @@
 #
 
 from flask import Flask, redirect, render_template, session, url_for, g, request
-import sys
+import sys,os
 from api import User, VM_assets
 from config import app_config
 from flask.ext import excel
 from pyexcel.ext import xlsx
+from werkzeug import secure_filename
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -71,16 +72,12 @@ def user_update():
 
 @app.route("/user/import", methods=['GET', 'POST'])
 def upload_file():
-    if request.method == 'POST':
-        return jsonify({"result": request.get_array(field_name='file')})
-    return '''
-    <!doctype html>
-    <title>Upload an excel file</title>
-    <h1>Excel file upload (csv, tsv, csvz, tsvz only)</h1>
-    <form action="" method=post enctype=multipart/form-data><p>
-    <input type=file name=file><input type=submit value=Upload>
-    </form>
-    '''
+    file = request.files['upload-excel']
+
+    file.save(app_config['windows_dir'] + secure_filename(file.filename))
+    file_path = app_config['windows_dir'] + secure_filename(file.filename)
+    return redirect(url_for('user'))
+
 
 @app.route("/user/export", methods=['GET'])
 def export_records():
