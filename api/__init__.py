@@ -2,9 +2,8 @@
 #
 
 
-from sql_data import User
-from sql_data import VM_assets
+from sql_data import Action
 
-__all__ = ['User', 'VM_assets']
+__all__ = ['Action']
 
-print '我是api的init,我被调用了'
+# print '我是api的init,我被调用了'

@@ -3,123 +3,85 @@
 
 from pub import DB,Handle_excel
 from config import db_config, table_thead, excel_thead
-# print db_config
+import copy
+
 
 db = DB(host=db_config['host'], mysql_user=db_config['user'], mysql_pass=db_config['passwd'], mysql_db=db_config['db'])
 
-class User:
+class Action:
 
-    def __init__(self, cur='user'):
-        self.cur = 'user'
+    def __init__(self):
+        pass
 
-    def user_res(self, sql):
+    def get_data(self, sql):
         try:
             res = db.execute(sql)
         except Exception as error:
-            print '服务器出错,获取用户失败.'
+            print '获取数据失败,请联系管理员.'
             print error
             return False
         return res
 
-    def user_add(self, sql):
+    def sql_operation(self, sql,status):
         try:
             db.execute(sql)
         except Exception as error:
-            print '服务器出错,添加用户失败.'
+            if status == "add":
+                print '添加数据失败,请检查填写信息是否冲突.'
+            elif status == "update":
+                print '数据信息更新失败.'
+            elif status == "delete":
+                print '删除数据失败.'
             print error
             return False
         return True
 
-    def user_delete(self, sql):
-        try:
-            db.execute(sql)
-        except Exception as error:
-            print '服务器出错,删除用户失败.'
-            print error
-            return False
-        return True
+    def data_import(self,excel,cur):
+        instance = Handle_excel(excel=excel,cur=cur)    # 初始化一个处理excel实例
+        table_res = instance.handle_excel()             # 获取excel的数据，格式为[{},{},{}]
+        multiple = len(table_thead[cur])                # 拼接%s的倍数 
 
-    def user_update(self, sql):
-        try:
-            db.execute(sql)
-        except Exception as error:
-            print '服务器出错,用户信息更新失败.'
-            print error
-            return False
-        return True
+        first_list = ['%s'] * multiple                  # 
+        front_dir = ','.join(first_list)                # 拼接sql前半部分
+        second_list = ['"%s"'] * multiple               # 
+        back_dir = ','.join(second_list)                # 拼接sql后半部分
 
-    def user_import(self,excel,cur):
-        instance = Handle_excel(excel=excel,cur=cur)
-        table_res = instance.handle_excel()
-        sql = 'insert into user (username,password,role,email) values ("%s","%s","%s","%s")'
+        tmp_sql = 'insert into %s (' + front_dir + ') values (' + back_dir + ')'
+        tmp = [cur]                                     # 
+        for thead in table_thead[cur]:                  # 定义一个临时[],用于存放sql格式化的值
+            tmp.append(thead)                           #
+
         for data in table_res:
-            tmp = []
+            format_val = copy.deepcopy(tmp)
             for key in table_thead[cur]:
-                tmp.append(data[key])
-            # print tmp
-            insert_sql = sql % tuple(tmp)
-            # print insert_sql
-            db.execute(insert_sql)
+                format_val.append(data[key])
+            sql = tmp_sql % tuple(format_val)
+            db.execute(sql)
 
+    def data_export(self,cur):
+        multiple = len(table_thead[cur])               # 拼接%s的倍数 
+        join_list = ['%s'] * multiple                  #
+        split_str = ','.join(join_list)                # 拼接sql
+        tmp_sql = "select " + split_str + " from %s"
 
-        
-
-    def user_export(self):
-        sql = "select username,password,role,email from user"
+        format_val = []
+        for thead in table_thead[cur]:
+            format_val.append(thead)
+        format_val.append(cur)
+        sql = tmp_sql % tuple(format_val)
         dbres = db.execute(sql)                 # 从数据库获取数据格式为({},{})
         export_res = []                         # 定义获取导出数据格式[[],[]]
-        exc_thead = excel_thead[self.cur]       # 引入excel表头文件
-        tab_thead = table_thead[self.cur]       # 引入db表头文件
+        exc_thead = excel_thead[cur]            # 引入excel表头文件
+        tab_thead = table_thead[cur]            # 引入db表头文件
         export_res.append(exc_thead)
         for i in range(len(dbres)):
             tmp = [i+1]
             for thead in tab_thead:
                 tmp.append(dbres[i][thead])
             export_res.append(tmp)
-        # print export_res
-        return export_res
+        return export_res                       # 返回数据格式[[],[],[]]作为导入excel的数据
             
 
 
 
-class VM_assets:
 
-    def __init__(self):
-        pass
-
-    def vmassets_res(self, sql):
-        try:
-            res = db.execute(sql)
-        except Exception as error:
-            print 'Get vm assets failed.'
-            print error
-            return False
-        return res
-
-    def vmassets_add(self, sql):
-        try:
-            db.execute(sql)
-        except Exception as error:
-            print 'Add vm assets failed.'
-            print error
-            return False
-        print '资源添加成功'
-        return True
-
-    def vmassets_delete(self, sql):
-        try:
-            db.execute(sql)
-        except Exception as error:
-            print 'Delete vm assets failed.'
-            print error
-            return False
-        return True
-
-    def vmassets_update(self, sql):
-        try:
-            db.execute(sql)
-        except Exception as error:
-            print 'Update vm assets failed.'
-            print error
-            return False
-        return True

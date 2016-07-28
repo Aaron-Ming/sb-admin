@@ -21,7 +21,7 @@ table_thead = {'user':['username',
                        'role',
                        'email'],
 
-             'vm_assets':['ip_addr',
+              'vm_assets':['ip_addr',
                           'app_name',
                           'hostname',
                           'vc_name',
@@ -45,6 +45,7 @@ excel_thead = {'user':['USE',
                       '密码',
                       '角色',
                       '邮箱'],
+
               'vm_assets':['USE',
                           'IP地址',
                           '应用系统名称',
@@ -64,4 +65,6 @@ excel_thead = {'user':['USE',
                           '拟定回收日期',
                           '备注',
                           '操作']
-}
+              }
+
+

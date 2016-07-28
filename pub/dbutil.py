@@ -6,7 +6,8 @@ import datetime
 import MySQLdb
 import MySQLdb.cursors
 # 引入了mysqldb返回({},{})格式的值MySQLdb.cursors.DictCursor
-class DB: 
+class DB:
+ 
     conn = None
     db = None
     host = None
@@ -16,9 +17,11 @@ class DB:
         self.mysql_user = mysql_user
         self.mysql_pass = mysql_pass
         self.mysql_db = mysql_db
+
     def connect(self):
         self.conn = MySQLdb.connect(host=self.host, user=self.mysql_user, passwd=self.mysql_pass, db=self.mysql_db, charset="utf8", connect_timeout=600, compress=True,cursorclass = MySQLdb.cursors.DictCursor)
         self.conn.autocommit(True)
+
     def execute(self, sql):
         try:
             cursor = self.conn.cursor()

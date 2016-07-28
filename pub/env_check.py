@@ -42,7 +42,6 @@ class Env_check():
 
         return True
         
-
     def user_check(self):
         pass
 
