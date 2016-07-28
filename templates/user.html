@@ -104,7 +104,8 @@
             <div class="col-lg-8">
                 <div class="pane text-right">
                     <div class="panel-body">
-                        <button type="button" class="btn btn-xs btn-primary text-right">导出</button>
+                        <!-- <button type="button" class="btn btn-xs btn-primary text-right" id="export-user-btn" onclick="window.location.href='/user/export';">导出</button> -->
+                        <button type="button" class="btn btn-xs btn-primary text-right" id="export-user-btn">导出</button>
                         <button type="button" class="btn btn-xs btn-primary text-right" data-toggle="modal" data-target="#upload-file-Modal">导入</button>
                     </div>
                 </div>
@@ -251,6 +252,16 @@
         })
         return false
     })
+
+    // 实现页面自动转跳至导出excel路由
+    $('#export-user-btn').on('click',function(){
+        location.href = "/user/export"
+    })
+
+
+
+
+
 </script>
 
 

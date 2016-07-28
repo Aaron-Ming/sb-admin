@@ -4,6 +4,7 @@
 from flask import Flask, redirect, render_template, session, url_for, g, request
 import sys,os
 from api import User, VM_assets
+from pub import Env_check,Handle_excel
 from config import app_config
 from flask.ext import excel
 from pyexcel.ext import xlsx
@@ -33,26 +34,22 @@ def user_add():
     role = request.form.get('role', None)
     email = request.form.get('email', None)
     sql = 'insert into user (username,password,role,email) values ("%s","%s","%s","%s")' % (username,password,role,email)
-    try:
-        User().user_add(sql)
-    except Exception as error:
-        print '服务器出错,添加用户失败.'
-        print error
+    if User().user_add(sql):
+        return 'ok'
+    else:
         return 'error'
-    return 'ok'
+
 
 @app.route('/user/delete', methods=['POST'])
 def user_delete():
     userid = request.form.get('id', None)
     sql = 'delete from user where id="%s"' % (userid)
     print 'userid is'+userid
-    try:
-        User().user_delete(sql)
-    except Exception as error:
-        print '服务器出错,删除用户失败.'
-        print error
+    if User().user_delete(sql):
+        return 'ok'
+    else:
         return 'error'
-    return 'ok'
+
 
 @app.route('/user/update', methods=['POST'])
 def user_update():
@@ -62,27 +59,26 @@ def user_update():
     email = request.form.get('update_email', None)
     sql = 'update user set password="%s",role="%s",email="%s" where id="%s"' % (password,role,email,userid)
     print sql
-    try:
-        User().user_update(sql)
-    except Exception as error:
-        print '服务器出错,用户信息更新失败.'
-        print error
+    if User().user_update(sql):
+        return 'ok'
+    else:
         return 'error'
-    return 'ok'
+
 
 @app.route("/user/import", methods=['GET', 'POST'])
 def upload_file():
     file = request.files['upload-excel']
-
+    Env_check().dir_check()             # 检查cmdb-file文件目录是否存在
     file.save(app_config['windows_dir'] + secure_filename(file.filename))
     file_path = app_config['windows_dir'] + secure_filename(file.filename)
+    User().user_import(excel=file_path,cur='user')
     return redirect(url_for('user'))
 
 
 @app.route("/user/export", methods=['GET'])
 def export_records():
-    return excel.make_response_from_array([[1,2,4,5,67,8], [3, 4]], "xlsx", file_name="export_data")
-
+    exc_res = User().user_export()      # 调用api返回生成excel值
+    return excel.make_response_from_array(exc_res, "xlsx", file_name="export_user")
 
 
 @app.route('/layout')
