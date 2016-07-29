@@ -1,6 +1,6 @@
 #encoding=utf-8
 #
-# 此模块作为处理excel表格,返回[[{},{}],[{},{}]]格式返回值
+# 此模块作为处理excel表格,返回[{},{},{},{}]格式返回值
 # 
 import sys,xlrd
 from config import table_thead
@@ -37,7 +37,7 @@ class Handle_excel:
                 cell = exc_make.cell_value(rown,coln)
                 tmp[table_key[coln-1]] = cell
             res.append(tmp)
-        return res
+        return res                          # 返回[{},{},{},{}]格式
 
 if __name__ == '__main__':
     pass

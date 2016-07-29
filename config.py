@@ -16,12 +16,13 @@ app_config = {
     'windows_dir':'E:\\tmp\\cmdb-file\\'
 }
 
+# 数据库表头
 table_thead = {'user':['username',
                        'password',
                        'role',
                        'email'],
 
-              'vm_assets':['ip_addr',
+              'vmassets':['ip_addr',
                           'app_name',
                           'hostname',
                           'vc_name',
@@ -40,13 +41,14 @@ table_thead = {'user':['username',
                           'notes']
               }
 
+# excel文件表头
 excel_thead = {'user':['USE',
                       '用户名',
                       '密码',
                       '角色',
                       '邮箱'],
 
-              'vm_assets':['USE',
+              'vmassets':['USE',
                           'IP地址',
                           '应用系统名称',
                           '主机名',
@@ -63,8 +65,7 @@ excel_thead = {'user':['USE',
                           '项目组联系方式',
                           '创建日期',
                           '拟定回收日期',
-                          '备注',
-                          '操作']
+                          '备注']
               }
 
 
