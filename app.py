@@ -16,6 +16,10 @@ sys.setdefaultencoding('utf-8')
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+@app.route('/')
+def index():    
+    return redirect(url_for('login'))
+
 @app.route('/login', methods=['GET','POST'])
 def login():
     user_info = Action().auth_info()
